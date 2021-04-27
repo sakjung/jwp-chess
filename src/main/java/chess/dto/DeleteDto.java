@@ -1,10 +1,10 @@
 package chess.dto;
 
-public class DeleteResponseDto {
+public class DeleteDto {
     private final String roomName;
     private final Boolean success;
 
-    public DeleteResponseDto(String roomName, boolean success) {
+    public DeleteDto(String roomName, boolean success) {
         this.roomName = roomName;
         this.success = success;
     }

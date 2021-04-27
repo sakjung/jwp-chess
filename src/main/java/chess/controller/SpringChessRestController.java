@@ -1,6 +1,6 @@
 package chess.controller;
 
-import chess.dto.DeleteResponseDto;
+import chess.dto.DeleteDto;
 import chess.service.SpringChessService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,10 +16,10 @@ public class SpringChessRestController {
     }
 
     @DeleteMapping(value = "/delete/{roomName}")
-    public ResponseEntity<DeleteResponseDto> delete(@PathVariable("roomName") String roomName) {
+    public ResponseEntity<DeleteDto> delete(@PathVariable("roomName") String roomName) {
         springChessService.deleteRoom(roomName);
-        DeleteResponseDto deleteResponseDto = new DeleteResponseDto(roomName, true);
+        DeleteDto deleteDto = new DeleteDto(roomName, true);
 
-        return ResponseEntity.ok().body(deleteResponseDto);
+        return ResponseEntity.ok().body(deleteDto);
     }
 }

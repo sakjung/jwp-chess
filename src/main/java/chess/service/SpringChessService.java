@@ -23,12 +23,14 @@ public class SpringChessService {
 
     private final SpringRoomDao roomDao;
 
+
     public SpringChessService(SpringRoomDao roomDao) {
         this.roomDao = roomDao;
     }
 
     public long initializeRoom(String roomName) {
         roomDao.validateRoomExistence(roomName);
+
         ChessGame chessGame = initializeChessBoard();
         Room room = createRoom(roomName, chessGame);
 
@@ -58,10 +60,8 @@ public class SpringChessService {
         return chessGame;
     }
 
-    public ChessGame loadRoom(long id) {
-        Room room = roomDao.findById(id);
-
-        return createChessGame(room);
+    public Room loadRoom(long id) {
+        return roomDao.findById(id);
     }
 
     private Room createRoom(String roomName, ChessGame chessGame) {
@@ -72,7 +72,7 @@ public class SpringChessService {
         return new Room(roomName, turn, state);
     }
 
-    private ChessGame createChessGame(Room room) {
+    public ChessGame createChessGame(Room room) {
         ChessBoard chessBoard = new ChessBoard();
         Color turn = Color.convert(room.getTurn());
         JsonObject stateJson = room.getState();

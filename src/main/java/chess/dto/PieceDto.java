@@ -2,12 +2,12 @@ package chess.dto;
 
 import chess.domain.piece.Piece;
 
-public class PieceResponseDto {
+public class PieceDto {
     private final String color;
     private final String type;
     private final String position;
 
-    public PieceResponseDto(Piece piece) {
+    public PieceDto(Piece piece) {
         this.color = piece.getColor();
         this.type = piece.getType();
         this.position = piece.getPosition();

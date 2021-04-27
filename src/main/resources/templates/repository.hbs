@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8"/>
     <title>체스</title>
-    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="/css/style.css"/>
 </head>
 <body>
 <h1>저장된 게임 목록</h1>
 <div>
-    <form id="room" action="/load">
+    <form id="room" action="/load" method="post">
         <ul id="rooms" class="rooms">
             {{#roomNames}}
                 <li>

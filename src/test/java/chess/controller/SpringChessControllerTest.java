@@ -61,21 +61,21 @@ class SpringChessControllerTest {
                 .body("html.body.h1", equalTo("메인 화면"));
     }
 
-    @DisplayName("초기 체스방을 만들 때 체스방 생성 후 redirect 해주는지")
-    @Test
-    void gameRedirect() {
-        String roomName = "삭정방";
-
-        RestAssured.given().log().all()
-                .queryParam("roomName", roomName)
-                .redirects().follow(true)
-                .when().get("/game")
-                .then().log().all()
-                .statusCode(HttpStatus.OK.value())
-                .contentType(MediaType.TEXT_HTML_VALUE)
-                .body("html.body.div.h1", equalTo("ROOM " + roomName),
-                        "html.body.div.find{it.@id == 'turn'}.label", equalTo("white의 차례입니다."));
-    }
+//    @DisplayName("초기 체스방을 만들 때 체스방 생성 후 redirect 해주는지")
+//    @Test
+//    void gameRedirect() {
+//        String roomName = "삭정방";
+//
+//        RestAssured.given().log().all()
+//                .queryParam("roomName", roomName)
+//                .redirects().follow(true)
+//                .when().get("/game")
+//                .then().log().all()
+//                .statusCode(HttpStatus.OK.value())
+//                .contentType(MediaType.TEXT_HTML_VALUE)
+//                .body("html.body.div.h1", equalTo("ROOM " + roomName),
+//                        "html.body.div.find{it.@id == 'turn'}.label", equalTo("white의 차례입니다."));
+//    }
 
     @DisplayName("체스말을 움직이는 요청을 제대로 처리해서 이동시킨 view를 반환 해주는지")
     @Test
@@ -138,20 +138,20 @@ class SpringChessControllerTest {
         assertThat(actualRoomNames).hasSize(roomNames.size()).hasSameElementsAs(roomNames);
     }
 
-    @DisplayName("요청한 방이름이 저장되어 있는 경우 redirect 잘 해주는지")
-    @Test
-    void load() {
-        String roomName = "닉방";
-
-        RestAssured.given().log().all()
-                .queryParam("roomName", roomName)
-                .when().get("/load")
-                .then().log().all()
-                .statusCode(HttpStatus.OK.value())
-                .contentType(MediaType.TEXT_HTML_VALUE)
-                .body("html.body.div.h1", equalTo("ROOM " + roomName),
-                        "html.body.div.find{it.@id == 'turn'}.label", equalTo("white의 차례입니다."));
-    }
+//    @DisplayName("요청한 방이름이 저장되어 있는 경우 redirect 잘 해주는지")
+//    @Test
+//    void load() {
+//        String roomName = "닉방";
+//
+//        RestAssured.given().log().all()
+//                .queryParam("roomName", roomName)
+//                .when().get("/load")
+//                .then().log().all()
+//                .statusCode(HttpStatus.OK.value())
+//                .contentType(MediaType.TEXT_HTML_VALUE)
+//                .body("html.body.div.h1", equalTo("ROOM " + roomName),
+//                        "html.body.div.find{it.@id == 'turn'}.label", equalTo("white의 차례입니다."));
+//    }
 
     @DisplayName("삭제 요청한 방이름이 저장되어 있는 경우 방 기록을 잘 삭제해 주는지")
     @Test

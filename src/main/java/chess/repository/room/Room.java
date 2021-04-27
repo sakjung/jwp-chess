@@ -9,7 +9,7 @@ public class Room {
     private final String turn;
     private final JsonObject state;
 
-    public Room(String name, String turn, JsonObject state) {
+    public Room(final String name, final String turn, final JsonObject state) {
         this.name = name;
         this.turn = turn;
         this.state = state;
@@ -28,10 +28,10 @@ public class Room {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Room room = (Room) o;
+        final Room room = (Room) o;
         return Objects.equals(name, room.name) && Objects.equals(turn, room.turn) && Objects.equals(state, room.state);
     }
 

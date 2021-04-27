@@ -8,3 +8,13 @@ CREATE TABLE rooms (
     PRIMARY KEY (room_id),
     UNIQUE KEY (name)
 );
+
+CREATE TABLE players (
+    id VARCHAR(20) NOT NULL,
+    password VARCHAR(20) NOT NULL,
+    room_id INT,
+    color VARCHAR(6),
+    PRIMARY KEY (id),
+    FOREIGN KEY (room_id)
+    REFERENCES rooms(room_id) ON UPDATE CASCADE
+);

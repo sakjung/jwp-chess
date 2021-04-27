@@ -1,6 +1,6 @@
 package chess.controller;
 
-import chess.dto.DeleteResponseDto;
+import chess.dto.DeleteDto;
 import chess.repository.room.DuplicateRoomNameException;
 import chess.repository.room.InvalidRoomDeleteException;
 import chess.repository.room.NoSuchRoomNameException;
@@ -29,9 +29,9 @@ public class SpringChessControllerAdvice {
     }
 
     @ExceptionHandler(InvalidRoomDeleteException.class)
-    public ResponseEntity<DeleteResponseDto> deleteHandleError(HttpServletRequest req) {
+    public ResponseEntity<DeleteDto> deleteHandleError(HttpServletRequest req) {
         String roomName = req.getServletPath();
-        DeleteResponseDto deleteResponseDto = new DeleteResponseDto(roomName, false);
-        return ResponseEntity.badRequest().body(deleteResponseDto);
+        DeleteDto deleteDto = new DeleteDto(roomName, false);
+        return ResponseEntity.badRequest().body(deleteDto);
     }
 }
