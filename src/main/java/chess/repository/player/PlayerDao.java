@@ -21,16 +21,20 @@ public class PlayerDao {
     }
 
     public int countPlayers(final long roomId, final String playerId) {
-        String queryForPlayerCount = "SELECT COUNT(*) FROM players WHERE room_id = ?";
-        Integer count = jdbcTemplate.queryForObject(queryForPlayerCount, Integer.class, roomId);
+        try {
+            String queryForPlayerCount = "SELECT COUNT(*) FROM players WHERE room_id = ?";
+            Integer count = jdbcTemplate.queryForObject(queryForPlayerCount, Integer.class, roomId);
 
-        String queryForPlayerId = "SELECT room_id FROM players WHERE id = ?";
-        long playerRoomId = jdbcTemplate.queryForObject(queryForPlayerId, Long.class, playerId);
+            String queryForPlayerId = "SELECT room_id FROM players WHERE id = ?";
+            long playerRoomId = jdbcTemplate.queryForObject(queryForPlayerId, Long.class, playerId);
 
-        if (roomId != playerRoomId && count.equals(2)) {
-            throw new NoVacantRoomException();
+            if (roomId != playerRoomId && count.equals(2)) {
+                throw new NoVacantRoomException();
+            }
+            return count;
+        } catch (Exception e) {
+            return 0;
         }
-        return count;
     }
 
     public void validatePlayer(final String playerId, final String password) {
