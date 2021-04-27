@@ -57,6 +57,7 @@ public class SpringChessController {
         String playerId = parameterMap.get("playerId")[0];
         String password = parameterMap.get("password")[0];
 
+        springChessAuthService.login(playerId, password);
         redirectAttributes.addFlashAttribute("USER", new UserVo(playerId, password));
 
         return "redirect:/";
@@ -70,7 +71,7 @@ public class SpringChessController {
         String playerId = user.getPlayerId();
         String password = user.getPassword();
 
-        String colorAssigned = springChessAuthService.loginPlayer(id, playerId, password);
+        String colorAssigned = springChessAuthService.assignPlayerColor(id, playerId, password);
 
         return "redirect:/game/" + id + "/" + colorAssigned;
     }
@@ -83,7 +84,7 @@ public class SpringChessController {
         String playerId = user.getPlayerId();
         String password = user.getPassword();
 
-        String colorAssigned = springChessAuthService.loginPlayer(id, playerId, password);
+        String colorAssigned = springChessAuthService.assignPlayerColor(id, playerId, password);
 
         return "redirect:/game/" + id + "/" + colorAssigned;
     }

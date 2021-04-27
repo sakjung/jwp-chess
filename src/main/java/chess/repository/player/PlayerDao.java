@@ -17,7 +17,6 @@ public class PlayerDao {
 
     public void savePlayer(Player player) {
         String query = "INSERT INTO players (id, password, room_id, color) VALUES (?, ?, ?, ?) ON DUPLICATE KEY UPDATE room_id = VALUES(room_id), color = VALUES(color)";
-
         jdbcTemplate.update(query, player.getId(), player.getPassword(), player.getRoomId(), player.getColor());
     }
 

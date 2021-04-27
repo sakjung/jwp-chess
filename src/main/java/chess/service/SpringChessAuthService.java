@@ -17,7 +17,7 @@ public class SpringChessAuthService {
         playerDao.validatePlayer(playerId, password);
     }
 
-    public String loginPlayer(final long roomId, final String playerId, final String password) {
+    public String assignPlayerColor(final long roomId, final String playerId, final String password) {
         int currentPlayerCount = playerDao.countPlayers(roomId, playerId);
 
         if (currentPlayerCount == 2) {
@@ -32,5 +32,10 @@ public class SpringChessAuthService {
 
     public void checkPlayerTurn(final long roomId, final String playerId) {
         playerDao.checkPlayerTurn(roomId, playerId);
+    }
+
+    public void login(final String playerId, final String password) {
+        Player player = new Player(playerId, password);
+        playerDao.savePlayer(player);
     }
 }
