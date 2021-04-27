@@ -1,6 +1,7 @@
 package chess.service;
 
 import chess.domain.feature.Color;
+import chess.repository.player.NoVacantRoomException;
 import chess.repository.player.Player;
 import chess.repository.player.PlayerDao;
 import org.springframework.stereotype.Service;
@@ -13,19 +14,23 @@ public class SpringChessAuthService {
         this.playerDao = playerDao;
     }
 
-    public void validatePlayer(final String playerId, final String password) {
-        playerDao.validatePlayer(playerId, password);
-    }
 
-    public String assignPlayerColor(final long roomId, final String playerId, final String password) {
-        int currentPlayerCount = playerDao.countPlayers(roomId, playerId);
+    public String assignPlayerColor(final long roomId, final String playerId) {
+        Player player = playerDao.getPlayer(playerId);
 
-        if (currentPlayerCount == 2) {
-            return playerDao.playerColor(playerId);
+        if (player.getRoomId() == roomId) {
+            return player.getColor();
         }
+
+        int currentPlayerCount = playerDao.countPlayers(roomId);
+        if (currentPlayerCount == 2) {
+            throw new NoVacantRoomException();
+        }
+
+        player.setRoomId(roomId);
         String colorAssigned = Color.assignColor(currentPlayerCount);
-        Player player = new Player(playerId, password, roomId, colorAssigned);
-        playerDao.savePlayer(player);
+        player.setColor(colorAssigned);
+        playerDao.allocatePlayer(player);
 
         return colorAssigned;
     }
@@ -36,6 +41,6 @@ public class SpringChessAuthService {
 
     public void login(final String playerId, final String password) {
         Player player = new Player(playerId, password);
-        playerDao.savePlayer(player);
+        playerDao.enrollPlayer(player);
     }
 }

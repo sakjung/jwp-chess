@@ -5,8 +5,8 @@ import chess.domain.feature.Color;
 public class Player {
     private final String id;
     private final String password;
-    private final long roomId;
-    private final String color;
+    private long roomId;
+    private String color;
 
     public Player(final String id, final String password) {
         this(id, password, 0L, Color.NO_COLOR.getColor());
@@ -34,4 +34,13 @@ public class Player {
     public String getColor() {
         return color;
     }
+
+    public void setRoomId(final long roomId) {
+        this.roomId = roomId;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
 }

@@ -69,9 +69,8 @@ public class SpringChessController {
 
         UserVo user = (UserVo) session.getAttribute("USER");
         String playerId = user.getPlayerId();
-        String password = user.getPassword();
 
-        String colorAssigned = springChessAuthService.assignPlayerColor(id, playerId, password);
+        String colorAssigned = springChessAuthService.assignPlayerColor(id, playerId);
 
         return "redirect:/game/" + id + "/" + colorAssigned;
     }
@@ -82,9 +81,8 @@ public class SpringChessController {
 
         UserVo user = (UserVo) session.getAttribute("USER");
         String playerId = user.getPlayerId();
-        String password = user.getPassword();
 
-        String colorAssigned = springChessAuthService.assignPlayerColor(id, playerId, password);
+        String colorAssigned = springChessAuthService.assignPlayerColor(id, playerId);
 
         return "redirect:/game/" + id + "/" + colorAssigned;
     }
