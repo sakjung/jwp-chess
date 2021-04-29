@@ -13,7 +13,7 @@ public class PlayerDao {
     }
 
     public void enrollPlayer(Player player) {
-        String query = "INSERT INTO players (id, password) VALUES (?, ?)";
+        String query = "INSERT IGNORE INTO players (id, password) VALUES (?, ?)";
         jdbcTemplate.update(query, player.getId(), player.getPassword());
     }
 
